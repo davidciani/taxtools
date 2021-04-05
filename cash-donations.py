@@ -9,7 +9,7 @@ from pathlib import Path
 logger = logging.getLogger(__name__)
 
 header = """V042
-ATaxTool Donations 0.3
+ATaxTool Donations 0.4
 D{date:%Y-%m-%d}
 ^
 """
