@@ -4,12 +4,18 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+taxtools = {editable = true, path = "."}
+typing-extensions = "*"
+maya = "*"
+thefuzz = "*"
+python-levenshtein = "*"
+pandas = "*"
 
 [dev-packages]
 black = "*"
 
 [requires]
-python_version = "3.9"
+python_version = "3.10"
 
 [pipenv]
 allow_prereleases = true

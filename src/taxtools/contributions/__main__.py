@@ -6,10 +6,13 @@ from csv import DictReader
 from datetime import date, datetime
 from pathlib import Path
 
+logging.basicConfig()
 logger = logging.getLogger(__name__)
 
+logger.setLevel(logging.DEBUG)
+
 header = """V042
-ATaxTool Donations 0.4
+ATaxTools Donations
 D{date:%Y-%m-%d}
 ^
 """
@@ -33,7 +36,7 @@ X {payee}/{note} ({ein})
 """
 
 
-def main(args):
+def main(args: argparse.Namespace):
 
     input_file = Path(args.input).resolve(strict=True)
     logger.info(f"Input file: {input_file}")
@@ -49,9 +52,10 @@ def main(args):
     with input_file.open("r") as f:
         records = list(DictReader(f))
 
-    with output_file.open("x", newline="\r\n") as f:
+    with output_file.open("w", newline="\r\n") as f:
         f.write(header.format(date=date.today()))
         for record in records:
+            logger.debug(record.keys())
             if float(record["amount"]) > 0:
                 if record["notes"] != "":
                     f.write(
